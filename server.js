@@ -1,27 +1,31 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const hbs = require('hbs');
+const app = express();
+const port = 3000;
 
 app.use(express.static(__dirname + '/Public'));
 
 app.get('/', (req, res) => {
     //res.send('<h1>Hello World!</h1>'); 
-    res.send({
-        name: 'Nosa',
-        Age: 29,
+    res.render({
+        pageTitle: 'Home Page',
+        welcomeMessage: 'Welcome to my webpage',
         likes: [
-            'Reading',
-            'Trancedental Meditation',
-            'Hoeing'
-        ]
-
+                'Reading',
+                'Trancedental Meditation',
+                'Hoeing'
+            ]
+            //
     })
 });
 
 app.get('/about', (req, res) => {
-    res.send('<h1>About Me</h1>')
+    res.render('about.hbs', {
+        pageTitle: 'About Page',
+        currentYear: new Date().getFullYear()
+    })
 });
-
+//
 app.get('/contact', (req, res) => {
     res.send({
         errorMessage: 'Unable to handle request'
